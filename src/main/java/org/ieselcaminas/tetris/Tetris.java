@@ -27,6 +27,7 @@ public class Tetris extends javax.swing.JFrame {
     
     private void myInit() {
         setLocationRelativeTo(null);
+        board.setGetScorer(scoreboard);
         board.setIncrementer(scoreboard);
     }
     
@@ -49,6 +50,8 @@ public class Tetris extends javax.swing.JFrame {
         menuInitGame = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mebuConfig = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuTop = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(scoreboard, java.awt.BorderLayout.PAGE_END);
@@ -90,6 +93,18 @@ public class Tetris extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Score");
+
+        menuTop.setText("Top");
+        menuTop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTopActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuTop);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -101,8 +116,13 @@ public class Tetris extends javax.swing.JFrame {
 
     private void mebuConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mebuConfigActionPerformed
         ConfigDialog dialog = new ConfigDialog(this, true);
+        dialog.setInitGame(board);
         dialog.setVisible(true);
     }//GEN-LAST:event_mebuConfigActionPerformed
+
+    private void menuTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTopActionPerformed
+        
+    }//GEN-LAST:event_menuTopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,9 +163,11 @@ public class Tetris extends javax.swing.JFrame {
     private org.ieselcaminas.tetris.Board board;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem mebuConfig;
     private javax.swing.JMenuItem menuInitGame;
+    private javax.swing.JMenuItem menuTop;
     private org.ieselcaminas.tetris.Scoreboard scoreboard;
     // End of variables declaration//GEN-END:variables
 }

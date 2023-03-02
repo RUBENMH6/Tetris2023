@@ -8,7 +8,7 @@ package org.ieselcaminas.tetris;
  *
  * @author victor
  */
-public class Scoreboard extends javax.swing.JPanel implements Incrementer {
+public class Scoreboard extends javax.swing.JPanel implements Incrementer, GetScorer {
     
     private int score;
 
@@ -30,14 +30,11 @@ public class Scoreboard extends javax.swing.JPanel implements Incrementer {
         labelScore.setText("0");
     }
     
-    public void incrementScore(int increment) {
+    public void getScore(int increment) {
         score += increment;
         labelScore.setText("" + score);
     }
     
-    public void doSomething() {
-        
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

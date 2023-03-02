@@ -9,14 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
  *
  * @author victor
  */
-public class Board extends javax.swing.JPanel {
+public class Board extends javax.swing.JPanel implements InitGame {
     
     public static final int NUM_ROWS = 22;
     public static final int NUM_COLS = 10;
@@ -28,6 +30,7 @@ public class Board extends javax.swing.JPanel {
     private int deltaTime;
     
     private Incrementer incrementer;
+    private GetScorer getScorer;
     
     private Tetrominoes[][] matrix;
     
@@ -36,7 +39,11 @@ public class Board extends javax.swing.JPanel {
     public void setIncrementer(Incrementer incrementer) {
         this.incrementer = incrementer;
     }
-
+    
+    public void setGetScorer (GetScorer getScorer) {
+        this.getScorer = getScorer;
+    }
+    
   
     class MyKeyAdapter extends KeyAdapter {
         
@@ -114,6 +121,8 @@ public class Board extends javax.swing.JPanel {
     }
     
     public void initGame() {
+        keyAdapter = new MyKeyAdapter();
+        addKeyListener(keyAdapter);
         resetMatrix();
         resetPosition();
         currentShape = new Shape();
@@ -141,8 +150,7 @@ public class Board extends javax.swing.JPanel {
         resetMatrix();
         //deltaTime = 500;
         setFocusable(true);
-        keyAdapter = new MyKeyAdapter();
-        addKeyListener(keyAdapter);
+        
         
         timer = new Timer(0, new ActionListener() {
             @Override
@@ -212,7 +220,10 @@ public class Board extends javax.swing.JPanel {
     private void processGameOver() {
         timer.stop();
         removeKeyListener(keyAdapter);
-        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        JFrame parentJFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        GetScorerDialog dialog = new GetScorerDialog(parentJFrame, true);
+        dialog.getScore(getScorer);
+        dialog.setVisible(true);
     }
     
     private void movePieceToMatrix() {
