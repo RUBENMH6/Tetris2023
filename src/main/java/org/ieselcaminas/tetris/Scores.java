@@ -72,6 +72,7 @@ public class Scores {
             int i = 0;
             while (true) {
                 lists[i] = (List<Score>) in.readObject();
+                i++;
             }
         } catch (EOFException ex) {
         
