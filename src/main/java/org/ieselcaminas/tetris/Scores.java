@@ -4,13 +4,18 @@
  */
 package org.ieselcaminas.tetris;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Scores {
@@ -60,8 +65,29 @@ public class Scores {
         } 
     }
     
-    public void readFileDat(String filename) {
+    public void readListFromFile() {
+        ObjectInputStream in = null;
+        try {
+            in = new ObjectInputStream( new FileInputStream("scores.dat") );
+            int i = 0;
+            while (true) {
+                lists[i] = (List<Score>) in.readObject();
+            }
+        } catch (EOFException ex) {
         
+        } catch (IOException ex) {
+            
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                  in.close();  
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }  
+            }       
+        } 
         
     }
     
