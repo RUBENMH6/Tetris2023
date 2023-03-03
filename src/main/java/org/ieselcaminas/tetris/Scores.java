@@ -6,6 +6,7 @@ package org.ieselcaminas.tetris;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,12 +23,19 @@ public class Scores {
     
     public static final int NUM_HIGH_SCORES = 5;
     private List<Score>[] lists;
+
+    
     
     public Scores() {
         lists = new ArrayList[3];
         for (int i = 0; i < lists.length ; i++ ) {
             lists[i] = new ArrayList<>();
         }
+        readListFromFile();
+    }
+    
+    public List<Score>[] getLists() {
+        return lists;
     }
     
     public void addScore(Score score){
@@ -75,7 +83,9 @@ public class Scores {
                 i++;
             }
         } catch (EOFException ex) {
-        
+            
+        } catch (FileNotFoundException ex) {
+            
         } catch (IOException ex) {
             
         } catch (ClassNotFoundException ex) {
@@ -89,7 +99,6 @@ public class Scores {
                 }  
             }       
         } 
-        
     }
     
     private int getMinScore(int level) {
