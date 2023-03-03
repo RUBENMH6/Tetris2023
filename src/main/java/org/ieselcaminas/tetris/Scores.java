@@ -31,7 +31,7 @@ public class Scores {
     }
     
     public void addScore(Score score){
-        int level = socre.getLevel();
+        int level = score.getLevel();
         List<Score> list = lists[level];
         if (list.size() > NUM_HIGH_SCORES) {
            if (score.getScore() > getMinScore(level)) {

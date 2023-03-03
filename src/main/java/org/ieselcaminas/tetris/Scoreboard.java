@@ -30,10 +30,6 @@ public class Scoreboard extends javax.swing.JPanel implements Incrementer, GetSc
         labelScore.setText("0");
     }
     
-    public void getScore(int increment) {
-        score += increment;
-        labelScore.setText("" + score);
-    }
     
 
     /**
@@ -62,4 +58,15 @@ public class Scoreboard extends javax.swing.JPanel implements Incrementer, GetSc
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelScore;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void incrementScore(int increment) {
+        score += increment;
+        labelScore.setText(""+ score);
+    }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
 }

@@ -222,7 +222,7 @@ public class Board extends javax.swing.JPanel implements InitGame {
         removeKeyListener(keyAdapter);
         JFrame parentJFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         GetScorerDialog dialog = new GetScorerDialog(parentJFrame, true);
-        dialog.getScore(getScorer);
+        dialog.setGetScorer(getScorer);
         dialog.setVisible(true);
     }
     

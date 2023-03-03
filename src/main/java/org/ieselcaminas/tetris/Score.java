@@ -30,6 +30,12 @@ public class Score implements Comparable<Score>,  Serializable {
     public int getScore() {
         return score;
     }
+    
+    @Override 
+    public String toString(){
+        return name + ": " + score + " : " + date + " : " + level;
+    }
+    
     @Override
     public int compareTo(Score t) {
         Integer i = score;
